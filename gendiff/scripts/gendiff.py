@@ -1,9 +1,9 @@
 #!/usr/bin/env python
-from gendiff.entering_point import entering_point
+from gendiff.cli import run
 
 
 def main():
-    entering_point()
+    run()
 
 
 if __name__ == '__main__':
