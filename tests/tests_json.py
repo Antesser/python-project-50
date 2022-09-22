@@ -14,6 +14,6 @@ answer = '''{
 def tests_json():
     a = answer
     b = generate_diff('./tests/fixtures/first.json',
-                             './tests/fixtures/second.json')
+                      './tests/fixtures/second.json')
 
     assert len(a) == len(b)
