@@ -1,2 +1,2 @@
-__all__ = ['gendiff']
-from gendiff import generate_diff
+__all__ = ['engine']
+from .engine import generate_diff
