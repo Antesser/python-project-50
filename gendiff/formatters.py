@@ -1,5 +1,6 @@
 import json
 
+
 def prettify(dictionary):
     statuses = ('changed', 'added', 'deleted', 'unchanged', 'changeddict')
     diff = '{\n'

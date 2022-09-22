@@ -28,4 +28,5 @@ def generate_diff(first_file, second_file):
         else:
             diff[key] = ['unchanged', first_value]
     sorted_tuple = sorted(diff.items(), key=lambda x: x[0])
-    return dict(sorted_tuple)
+    a = prettify(dict(sorted_tuple))
+    return a
