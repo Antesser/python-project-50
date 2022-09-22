@@ -1,2 +1,2 @@
-__all__ = ['generate_diff']
+__all__ = ['gendiff']
 from gendiff import generate_diff
