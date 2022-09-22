@@ -1,3 +1,5 @@
+import json
+
 def prettify(dictionary):
     statuses = ('changed', 'added', 'deleted', 'unchanged', 'changeddict')
     diff = '{\n'
@@ -17,3 +19,8 @@ def prettify(dictionary):
         if i[1][0] == 'unchanged' or i[1][0] == 'changeddict':
             diff += f'  {i[0]}: {value}\n'
     return diff + '}'
+
+
+def create_json(file):
+    diff = json.dumps(file)
+    return diff

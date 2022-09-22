@@ -1,4 +1,4 @@
-from gendiff import engine
+from gendiff import generate_diff
 
 
 answer = '''{
@@ -13,7 +13,7 @@ answer = '''{
 
 def tests_json():
     a = answer
-    b = engine.generate_diff('./text/fixtures/first_plain.json',
-                             './text/fixtures/second_plain.json')
+    b = generate_diff('./text/fixtures/first.json',
+                      './text/fixtures/second.json')
 
     assert len(a) == len(b)
