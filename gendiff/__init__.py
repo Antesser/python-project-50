@@ -1,1 +1,1 @@
-from .engine import generate_diff
+from gendiff import *
