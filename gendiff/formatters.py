@@ -27,8 +27,9 @@ def create_json(file):
     return diff
 
 
-def create_plain(dic, addon='', line=''):
-    start = "Property '" + addon
+def create_plain(dic):
+    line = ''
+    start = "Property '" + ''
     ldic = list(dic)
     for key in ldic:
         value = dic.get(key)
