@@ -1,9 +1,10 @@
 #!/usr/bin/env python
-from gendiff.cli import run
+from gendiff import cli, engine
 
 
 def main():
-    run()
+    args = cli.run()
+    engine.start_program(args)
 
 
 if __name__ == '__main__':

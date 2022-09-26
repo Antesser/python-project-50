@@ -11,10 +11,10 @@ answer = '''{
 }'''
 
 
-def tests_json():
+def tests_yaml():
     a = answer
-    b = generate_diff('./tests/fixtures/first.json',
-                      './tests/fixtures/second.json',
+    b = generate_diff('./tests/fixtures/first.yaml',
+                      './tests/fixtures/second.yaml',
                       'string')
 
     assert len(a) == len(b)
