@@ -2,8 +2,18 @@ import json
 
 
 def prettify(dictionary):
-    statuses = ('changed', 'added', 'deleted', 'unchanged', 'changeddict')
     diff = '{\n'
+    dicstr = prettify_d(dictionary)
+    indent = ' ' * 2
+    dicstr = indent + dicstr.replace('\n', '\n' + indent)
+    diff += dicstr
+    diff = diff[:-3] + diff[-1]
+    return diff
+
+
+def prettify_d(dictionary):
+    statuses = ('changed', 'added', 'deleted', 'unchanged', 'changeddict')
+    diff = ''
     for i in dictionary.items():
         print(i)
         value = i[1][1]
