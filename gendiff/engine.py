@@ -25,10 +25,10 @@ def check_diff(first, second):
     keys_second = second.keys()
     deleted = keys_first - keys_second
     for key in deleted:
-        diff[key] = ['deleted', first.get(key)]
+        diff[key] = ['deleted', str(first.get(key))]
     added = keys_second - keys_first
     for key in added:
-        diff[key] = ['added', second.get(key)]
+        diff[key] = ['added', str(second.get(key))]
     keys_both = keys_second & keys_first
     for key in keys_both:
         first_value = first.get(key)
