@@ -1,9 +1,9 @@
 import json
 
 
-def prettify(dic):
+def prettify(dictionary):
     diff = '{\n'
-    dicstr = prettify_dic(dic)
+    dicstr = prettify_dict(dictionary)
     indent = ' ' * 2
     dicstr = indent + dicstr.replace('\n', '\n' + indent)
     diff += dicstr
@@ -11,10 +11,10 @@ def prettify(dic):
     return diff
 
 
-def prettify_dic(dic):
+def prettify_dict(dictionary):
     variable = ('changed', 'added', 'deleted', 'unchanged', 'changeddict')
     diff = ''
-    for i in dic.items():
+    for i in dictionary.items():
         if isinstance(i[1][1], dict):
             value = prettify(i[1][1])
         else:
