@@ -25,22 +25,30 @@ def check_diff(first, second):
     keys_second = second.keys()
     deleted = keys_first - keys_second
     for key in deleted:
-        diff[key] = ['deleted', str.lower(first.get(key))]
+        diff[key] = ['deleted', str(first.get(key))]
     added = keys_second - keys_first
     for key in added:
-        diff[key] = ['added', str.lower(second.get(key))]
+        diff[key] = ['added', str(second.get(key))]
     keys_both = keys_second & keys_first
     for key in keys_both:
         first_value = first.get(key)
         second_value = second.get(key)
+        if str(first_value) == 'True':
+            first_value = 'true'
+        elif str(second_value) == "True":
+            second_value = 'true'
+        elif str(first_value) == 'False':
+            first_value = 'false'
+        elif str(second_value) == "False":
+            second_value = 'false'
         if first_value != second_value:
             if isinstance(first_value, dict) and isinstance(second_value,
                                                             dict):
                 diff[key] = ['changeddict',
                              check_diff(first_value, second_value)]
             else:
-                diff[key] = ['changed', str.lower(first_value), str(second_value)]
+                diff[key] = ['changed', str(first_value), str(second_value)]
         else:
-            diff[key] = ['unchanged', str.lower(first_value)]
+            diff[key] = ['unchanged', str(first_value)]
     sorted_tuple = sorted(diff.items(), key=lambda x: x[0])
     return dict(sorted_tuple)
