@@ -3,13 +3,13 @@ from gendiff.formatters import prettify, create_plain, create_json
 
 
 def start_program(args):
-    print(generate_diff(args.first_file, args.second_file, format='string'))
+    print(check_diff(args.first_file, args.second_file, format='string'))
 
 
-def generate_diff(first_file, second_file, format=''):
+def check_diff(first_file, second_file, format=''):
     first = parser(first_file)
     second = parser(second_file)
-    result = check_diff(first, second)
+    result = generate_diff(first, second)
     if format == 'plain':
         diff = create_plain(result)
     elif format == 'json':
@@ -19,7 +19,7 @@ def generate_diff(first_file, second_file, format=''):
     return diff
 
 
-def check_diff(first, second):
+def generate_diff(first, second):
     diff = {}
     keys_first = first.keys()
     keys_second = second.keys()
