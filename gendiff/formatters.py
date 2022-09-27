@@ -15,8 +15,10 @@ def prettify_d(dictionary):
     statuses = ('changed', 'added', 'deleted', 'unchanged', 'changeddict')
     diff = ''
     for i in dictionary.items():
-        print(i)
-        value = i[1][1]
+        if isinstance(i[1][1], dict):
+            value = prettify(i[1][1])
+        else:
+            value = i[1][1]
         if i[1][0] not in statuses:
             diff += f'{i[0]}: {i[1]}\n'
             return diff + '}'
