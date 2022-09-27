@@ -39,8 +39,8 @@ def check_diff(first, second):
                 diff[key] = ['changeddict',
                              check_diff(first_value, second_value)]
             else:
-                diff[key] = ['changed', first_value, second_value]
+                diff[key] = ['changed', str(first_value), str(second_value)]
         else:
-            diff[key] = ['unchanged', first_value]
+            diff[key] = ['unchanged', str(first_value)]
     sorted_tuple = sorted(diff.items(), key=lambda x: x[0])
     return dict(sorted_tuple)
