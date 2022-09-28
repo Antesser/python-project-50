@@ -39,17 +39,16 @@ def create_json(file):
     return diff
 
 
-def create_plain(dic):
-    line = ''
+def create_plain(dictionary, add='', line=''):
     start = "Property '" + ''
-    ldic = list(dic)
-    for key in ldic:
-        value = dic.get(key)
+    ldict = list(dictionary)
+    for key in ldict:
+        value = dictionary.get(key)
         if value[0] == 'deleted':
             line += f"{start}{key}' was removed\n"
         if value[0] == 'added':
             if isinstance(value[1], dict):
-                finish = "'complex value'"
+                finish = "[complex value]"
             else:
                 finish = f"'{value[1]}'"
             line += f"{start}{key}' was added with value: {finish}\n"
@@ -57,6 +56,6 @@ def create_plain(dic):
             if isinstance(value[-1], dict):
                 line = create_plain(value[-1], key + '.', line)
             else:
-                line += f"{start}{key}' was changed from '{value[1]}' to"
+                line += f"{start}{key}' was updated. From '{value[1]}' to"
                 f"{value[2]}'\n"
     return line

@@ -19,6 +19,14 @@ def generate_diff(first_file, second_file, format=''):
     return diff
 
 
+def lower_str(value):
+    high = ['True', 'False']
+    if str(value) in high:
+        return value.lower()
+    else:
+        return value
+
+
 def check_diff(first, second):
     diff = {}
     keys_first = first.keys()
@@ -33,22 +41,16 @@ def check_diff(first, second):
     for key in keys_both:
         first_value = first.get(key)
         second_value = second.get(key)
-        if str(first_value) == 'True':
-            first_value = 'true'
-        elif str(second_value) == "True":
-            second_value = 'true'
-        elif str(first_value) == 'False':
-            first_value = 'false'
-        elif str(second_value) == "False":
-            second_value = 'false'
-        if first_value != second_value:
-            if isinstance(first_value, dict) and isinstance(second_value,
-                                                            dict):
+        fst = lower_str(first_value)
+        scd = lower_str(second_value)
+        if fst != scd:
+            if isinstance(fst, dict) and isinstance(scd,
+                                                    dict):
                 diff[key] = ['changeddict',
-                             check_diff(first_value, second_value)]
+                             check_diff(fst, scd)]
             else:
-                diff[key] = ['changed', str(first_value), str(second_value)]
+                diff[key] = ['changed', fst, scd]
         else:
-            diff[key] = ['unchanged', str(first_value)]
+            diff[key] = ['unchanged', fst]
     sorted_tuple = sorted(diff.items(), key=lambda x: x[0])
     return dict(sorted_tuple)
