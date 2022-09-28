@@ -21,10 +21,11 @@ def generate_diff(first_file, second_file, format=''):
 
 def lower_str(value):
     high = ['True', 'False']
-    if str(value) in high:
-        return value.lower()
+    new_str = str(value)
+    if new_str in high:
+        return new_str.lower()
     else:
-        return value
+        return new_str
 
 
 def check_diff(first, second):
