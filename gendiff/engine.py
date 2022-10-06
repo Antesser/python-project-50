@@ -19,13 +19,12 @@ def generate_diff(first_file, second_file, format=''):
     return diff
 
 
-def lower_str(value):
-    high = ['True', 'False']
-    new_str = str(value)
-    if new_str in high:
-        return new_str.lower()
+def lower(value):
+    low = ['True', 'False']
+    if str(value) in low:
+        return value.lower()
     else:
-        return new_str
+        return value
 
 
 def check_diff(first, second):
@@ -42,8 +41,8 @@ def check_diff(first, second):
     for key in keys_both:
         first_value = first.get(key)
         second_value = second.get(key)
-        fst = lower_str(first_value)
-        scd = lower_str(second_value)
+        fst = lower(first_value)
+        scd = lower(second_value)
         if fst != scd:
             if isinstance(fst, dict) and isinstance(scd,
                                                     dict):

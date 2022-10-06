@@ -12,3 +12,6 @@ package-install:
 
 make lint:
 	poetry run flake8
+
+make test:
+	poetry run pytest .

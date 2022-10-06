@@ -1,20 +1,10 @@
 from gendiff.engine import generate_diff
 
 
-answer = '''{
-  - follow: false
-    host: hexlet.io
-  - proxy: 123.234.53.22
-  - timeout: 50
-  + timeout: 20
-  + verbose: true
-}'''
-
-
 def tests_json():
-    a = answer
+    a = './tests/fixtures/answer_j.answer_j.y.json'
     b = generate_diff('./tests/fixtures/first.json',
                       './tests/fixtures/second.json',
                       'string')
 
-    assert len(a) == len(b)
+    assert a == b

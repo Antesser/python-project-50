@@ -1,6 +1,5 @@
-from gendiff.engine import generate_diff
-
-answer = '''{
+{
+    common: {
       + follow: false
         setting1: Value 1
       - setting2: 200
@@ -12,7 +11,7 @@ answer = '''{
         }
         setting6: {
             doge: {
-              - wow:
+              - wow: 
               + wow: so much
             }
             key: value
@@ -42,15 +41,4 @@ answer = '''{
         }
         fee: 100500
     }
-}'''
-
-
-def test_nested():
-    a = answer
-    b = generate_diff(
-        './tests/fixtures/first_nested.json',
-        './tests/fixtures/second_nested.json',
-        'string'
-    )
-
-    assert len(a) == len(b)
+}
