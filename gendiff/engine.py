@@ -53,9 +53,9 @@ def check_diff(first, second):
                 diff.append(diff_chd)
             else:
                 diff_changed = ({'key': key, 'status': 'changed',
-                                 'value':
-                                 {'old_value': f_val,
-                                  'new_value': s_val}
+                                 'value': {
+                                        'old_value': f_val,
+                                        'new_value': s_val}
                                  })
                 diff.append(diff_changed)
         else:
