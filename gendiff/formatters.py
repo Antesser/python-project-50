@@ -1,9 +1,6 @@
-import json
-
-
-def prettify(dictionary):
+def prettify(lst):
     diff = '{\n'
-    dicstr = prettify_dict(dictionary)
+    dicstr = prettify_dict(lst)
     indent = ' ' * 2
     dicstr = indent + dicstr.replace('\n', '\n' + indent)
     diff += dicstr
@@ -11,51 +8,49 @@ def prettify(dictionary):
     return diff
 
 
-def prettify_dict(dictionary):
-    variable = ('changed', 'added', 'deleted', 'unchanged', 'changeddict')
+def prettify_dict(lst):
     diff = ''
-    for i in dictionary.items():
-        if isinstance(i[1][1], dict):
-            value = prettify(i[1][1])
+    for key in lst:
+        if isinstance(key['value'], list):
+            value = prettify_dict(key['value'])
         else:
-            value = i[1][1]
-        if i[1][0] not in variable:
-            diff += f'  {i[0]}: {i[1]}\n'
-            return diff + '}'
-        if i[1][0] == 'changed':
-            diff += f"- {i[0]}: {i[1][1]}\n"
-            diff += f"+ {i[0]}: {i[1][2]}\n"
-        if i[1][0] == 'added':
-            diff += f"+ {i[0]}: {value}\n"
-        if i[1][0] == 'deleted':
-            diff += f"- {i[0]}: {value}\n"
-        if i[1][0] == 'unchanged' or i[1][0] == 'changeddict':
-            diff += f"  {i[0]}: {value}\n"
+            value = key['value']
+        if key['status'] == 'changed':
+            diff += f"- {key['key']}: {key['value']['old_value']}\n"
+            diff += f"+ {key['key']}: {key['value']['new_value']}\n"
+        if key['status'] == 'added':
+            diff += f"+ {key['key']}: {value}\n"
+        if key['status'] == 'deleted':
+            diff += f"- {key['key']}: {value}\n"
+        if key['status'] == 'unchanged':
+            diff += f" {key['key']}: {value}\n"
+        if key['status'] == 'changeddict':
+            diff += f" {key['key']}: {'{'} \n{value}\n"
     return diff + '}'
 
 
-def create_json(file):
-    diff = json.dumps(file)
-    return diff
-
-
-def create_plain(dictionary, add='', line=''):
-    start = "Property '" + ''
-    ldict = list(dictionary)
-    for key in ldict:
-        value = dictionary.get(key)
-        if value[0] == 'deleted':
-            line += f"{start}{key}' was removed\n"
-        if value[0] == 'added':
-            if isinstance(value[1], dict):
+def create_plain(lst, addon='', line=''):
+    start = "Property '" + addon
+    for key in lst:
+        if key['status'] == 'deleted':
+            line += f"{start}{key['key']}' was removed\n"
+        if key['status'] == 'added':
+            if isinstance(key['value'], dict):
                 finish = "[complex value]"
             else:
-                finish = f"'{value[1]}'"
-            line += f"{start}{key}' was added with value: {finish}\n"
-        if value[0] == 'changeddict':
-            if isinstance(value[-1], dict):
-                line = create_plain(value[-1], key + '.', line)
+                finish = f"'{key['value']}'"
+            line += f"{start}{key['key']}' was added with value: {finish}\n"
+        if key['status'] == 'changeddict':
+            line = create_plain(key['value'], addon + key['key'] + '.', line)
+        elif key['status'] == 'changed':
+            if isinstance(key['value']['old_value'], dict):
+                finish_old = "[complex value]"
             else:
-                line += f"{start}{key}' was updated. From '{value[1]}' to"
-                f"{value[2]}'\n"
+                finish_old = key['value']['old_value']
+            if isinstance(key['value']['new_value'], dict):
+                finish_new = "[complex value]"
+            else:
+                finish_new = key['value']['new_value']
+            line += f"{start}{key['key']}' was updated."
+            f"From '{finish_old}' to '{finish_new}'\n"
     return line

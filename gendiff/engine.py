@@ -28,29 +28,39 @@ def lower(value):
 
 
 def check_diff(first, second):
-    diff = {}
+    diff = []
     keys_first = first.keys()
     keys_second = second.keys()
     deleted = keys_first - keys_second
     for key in deleted:
-        diff[key] = ['deleted', str(first.get(key))]
+        diff_del = {'key': key, 'status': 'deleted', 'value': first.get(key)}
+        diff.append(diff_del)
     added = keys_second - keys_first
     for key in added:
-        diff[key] = ['added', str(second.get(key))]
+        diff_add = {'key': key, 'status': 'added', 'value': second.get(key)}
+        diff.append(diff_add)
     keys_both = keys_second & keys_first
     for key in keys_both:
         first_value = first.get(key)
         second_value = second.get(key)
-        fst = lower(first_value)
-        scd = lower(second_value)
-        if fst != scd:
-            if isinstance(fst, dict) and isinstance(scd,
-                                                    dict):
-                diff[key] = ['changeddict',
-                             check_diff(fst, scd)]
+        f_val = lower(first_value)
+        s_val = lower(second_value)
+        if f_val != s_val:
+            if isinstance(first_value, dict) and isinstance(s_val,
+                                                            dict):
+                diff_chd = ({'key': key, 'status': 'changeddict',
+                            'value': check_diff(f_val, s_val)})
+                diff.append(diff_chd)
             else:
-                diff[key] = ['changed', fst, scd]
+                diff_changed = ({'key': key, 'status': 'changed',
+                                 'value':
+                                 {'old_value': f_val,
+                                  'new_value': s_val}
+                                 })
+                diff.append(diff_changed)
         else:
-            diff[key] = ['unchanged', fst]
-    sorted_tuple = sorted(diff.items(), key=lambda x: x[0])
-    return dict(sorted_tuple)
+            diff_unchanged = ({'key': key, 'status': 'unchanged',
+                               'value': first_value})
+            diff.append(diff_unchanged)
+        diff.sort(key=lambda diff: diff['key'])
+    return diff
