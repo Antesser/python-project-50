@@ -51,6 +51,6 @@ def create_plain(lst, addon='', line=''):
                 finish_new = "[complex value]"
             else:
                 finish_new = key['value']['new_value']
-            line += f"{start}{key['key']}' was updated."
-            f"From '{finish_old}' to '{finish_new}'\n"
+            line += f"{start}{key['key']}' was updated. "\
+                f"From '{finish_old}' to '{finish_new}'\n"
     return line
