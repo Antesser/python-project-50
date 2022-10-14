@@ -1,5 +1,5 @@
+from gendiff.formatters import create_json, create_plain, prettify
 from gendiff.parser import parser
-from gendiff.formatters import prettify, create_plain, create_json
 
 
 def start_program(args):
@@ -31,14 +31,6 @@ def check_diff(first, second):
     diff = []
     keys_first = first.keys()
     keys_second = second.keys()
-    deleted = keys_first - keys_second
-    for key in deleted:
-        diff_del = {'key': key, 'status': 'deleted', 'value': first.get(key)}
-        diff.append(diff_del)
-    added = keys_second - keys_first
-    for key in added:
-        diff_add = {'key': key, 'status': 'added', 'value': second.get(key)}
-        diff.append(diff_add)
     keys_both = keys_second & keys_first
     for key in keys_both:
         first_value = first.get(key)
@@ -46,8 +38,7 @@ def check_diff(first, second):
         f_val = lower(first_value)
         s_val = lower(second_value)
         if f_val != s_val:
-            if isinstance(first_value, dict) and isinstance(s_val,
-                                                            dict):
+            if isinstance(f_val, dict) and isinstance(s_val, dict):
                 diff_chd = ({'key': key, 'status': 'changeddict',
                             'value': check_diff(f_val, s_val)})
                 diff.append(diff_chd)
@@ -62,5 +53,13 @@ def check_diff(first, second):
             diff_unchanged = ({'key': key, 'status': 'unchanged',
                                'value': first_value})
             diff.append(diff_unchanged)
-        diff.sort(key=lambda diff: diff['key'])
+    deleted = keys_first - keys_second
+    for key in deleted:
+        diff_del = {'key': key, 'status': 'deleted', 'value': first.get(key)}
+        diff.append(diff_del)
+    added = keys_second - keys_first
+    for key in added:
+        diff_add = {'key': key, 'status': 'added', 'value': second.get(key)}
+        diff.append(diff_add)
+    diff.sort(key=lambda diff: diff['key'])
     return diff

@@ -1,32 +1,33 @@
-def prettify(lst):
-    diff = '{\n'
-    dicstr = prettify_dict(lst)
-    indent = ' ' * 2
-    dicstr = indent + dicstr.replace('\n', '\n' + indent)
-    diff += dicstr
-    diff = diff[:-3] + diff[-1]
-    return diff
+SPACES = '  '
 
 
-def prettify_dict(lst):
+def prettify(lst, lvl=0):
     diff = ''
     for key in lst:
         if isinstance(key['value'], list):
-            value = prettify_dict(key['value'])
+            value = prettify(key['value'], lvl+1)
+        try:
+            if isinstance(key['value'], dict):
+                value = prettify(key['value'], lvl+1)
+        except TypeError:
+            value = key['value']
         else:
             value = key['value']
+        diff += SPACES * lvl
         if key['status'] == 'changed':
             diff += f"- {key['key']}: {key['value']['old_value']}\n"
+            diff += SPACES * lvl
             diff += f"+ {key['key']}: {key['value']['new_value']}\n"
         if key['status'] == 'added':
             diff += f"+ {key['key']}: {value}\n"
         if key['status'] == 'deleted':
             diff += f"- {key['key']}: {value}\n"
         if key['status'] == 'unchanged':
-            diff += f" {key['key']}: {value}\n"
+            diff += f"  {key['key']}: {value}\n"
         if key['status'] == 'changeddict':
-            diff += f" {key['key']}: {'{'} \n{value}\n"
-    return diff + '}'
+            diff += f"{key['key']}: {'{'}{value}\n"
+    diff = diff.replace('{{', '{')
+    return '{\n' + diff + '}'
 
 
 def create_plain(lst, addon='', line=''):
