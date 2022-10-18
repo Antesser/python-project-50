@@ -22,7 +22,7 @@ def generate_diff(first_file, second_file, format=''):
 def lower(value):
     low = ['True', 'False']
     if str(value) in low:
-        return value.lower()
+        return str(value.lower())
     else:
         return value
 
