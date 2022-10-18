@@ -1,4 +1,6 @@
-SPACES = '   '
+import json
+
+SPACES = '  '
 
 
 def prettify_val(value, lvl):
@@ -57,3 +59,8 @@ def create_plain(lst, addon='', line=''):
             line += f"{start}{key['key']}' was updated. "\
                 f"From '{finish_old}' to '{finish_new}'\n"
     return line
+
+
+def create_json(result):
+    diff = json.dumps(result)
+    return diff
