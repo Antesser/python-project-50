@@ -1,4 +1,4 @@
-SPACES = '  '
+SPACES = '   '
 
 
 def prettify_val(value, lvl):
