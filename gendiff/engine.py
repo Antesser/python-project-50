@@ -20,9 +20,9 @@ def generate_diff(first_file, second_file, format=''):
 
 
 def lower(value):
-    low = ['True', 'False']
+    low = [True, False]
     if value in low:
-        return str(value.lower())
+        return str(value).lower()
     else:
         return value
 
