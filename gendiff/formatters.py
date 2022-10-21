@@ -40,21 +40,19 @@ def prettify(lst, lvl=0):
                 f"{indent}  + {key_name}: "
                 f"{get_val(key['value']['new_value'], lvl)}"
             ])
-        elif key_stat == 'added':
+        else:
+            status = other_statuses(key_stat)
             diff.append(
-                f"{indent}  + {key_name}: {get_val(key_value, lvl)}"
-            )
-        elif key_stat == 'deleted':
-            diff.append(
-                f"{indent}  - {key_name}: {get_val(key_value, lvl)}"
-            )
-        elif key_stat == 'unchanged':
-            diff.append(
-                f"{indent}    {key_name}: {get_val(key_value, lvl)}"
+                f"{indent}{status}{key_name}: {get_val(key_value, lvl)}"
             )
     if not lvl:
         diff = ['{'] + diff + ['}']
     return '\n'.join(diff)
+
+
+def other_statuses(key_stat):
+    statuses = {'added': '  + ', 'deleted': '  - ', 'unchanged': '    '}
+    return statuses.get(key_stat)
 
 
 def is_complex(value):
@@ -86,8 +84,7 @@ def create_plain(lst, addon=""):
             result.append(
                 f"{start}{current_addon}' was updated. "
                 f"From {is_complex(key_value['old_value'])} "
-                f"to {is_complex(key_value['new_value'])}"
-                )
+                f"to {is_complex(key_value['new_value'])}")
         elif key_stat == 'deleted':
             result.append(
                 f"{start}{current_addon}' was removed"
