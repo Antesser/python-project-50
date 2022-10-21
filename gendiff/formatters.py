@@ -61,7 +61,7 @@ def is_complex(value):
     vals = ['true', 'false', 'null']
     if isinstance(value, dict):
         return "[complex value]"
-    if value in vals:
+    elif value in vals:
         return value
     elif isinstance(value, str):
         return f"'{value}'"
@@ -87,7 +87,7 @@ def create_plain(lst, addon='', line=''):
             finish_new = is_complex(key_value['new_value'])
             line += f"{start}{key_name}' was updated. "\
                 f"From {finish_old} to {finish_new}\n"
-    return line
+    return line[:-1]
 
 
 def create_json(result):
