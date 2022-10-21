@@ -69,25 +69,34 @@ def is_complex(value):
         return value
 
 
-def create_plain(lst, addon='', line=''):
-    start = "Property '" + addon
+def check_addon(addon, key_name):
+    return addon + f'.{key_name}' if addon else key_name
+
+
+def create_plain(lst, addon="", result=[]):
+    start = "Property '"
     for key in lst:
-        key_name = key['key']
-        key_stat = key['status']
-        key_value = key['value']
-        if key_stat == 'deleted':
-            line += f"{start}{key_name}' was removed\n"
-        if key_stat == 'added':
-            finish = is_complex(key_value)
-            line += f"{start}{key_name}' was added with value: {finish}\n"
+        current_addon = check_addon(addon, key['key'])
+        key_stat = key["status"]
+        key_value = key["value"]
         if key_stat == 'changeddict':
-            line = create_plain(key_value, addon + key_name + '.', line)
+            result.append(create_plain(key_value, current_addon))
         elif key_stat == 'changed':
-            finish_old = is_complex(key_value['old_value'])
-            finish_new = is_complex(key_value['new_value'])
-            line += f"{start}{key_name}' was updated. "\
-                f"From {finish_old} to {finish_new}\n"
-    return line[:-1]
+            result.append(
+                f"{start}{current_addon}' was updated. "
+                f"From {is_complex(key_value['old_value'])} "
+                f"to {is_complex(key_value['new_value'])}"
+                )
+        elif key_stat == 'deleted':
+            result.append(
+                f"{start}{current_addon}' was removed"
+            )
+        elif key_stat == 'added':
+            result.append(
+                f"{start}{current_addon}' was added with value: "
+                f"{is_complex(key_value)}"
+            )
+    return '\n'.join(result)
 
 
 def create_json(result):
