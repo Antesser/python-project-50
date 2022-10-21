@@ -12,7 +12,8 @@ def parser(path):
             data = yaml.safe_load(file)
     else:
         return 'Inputed format is not supported'
-    return lower(data)
+    lower(data)
+    return data
 
 
 def lower(data):
