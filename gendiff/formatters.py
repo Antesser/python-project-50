@@ -58,8 +58,11 @@ def prettify(lst, lvl=0):
 
 
 def is_complex(value):
+    vals = ['true', 'false', 'null']
     if isinstance(value, dict):
         return "[complex value]"
+    if value in vals:
+        return value
     elif isinstance(value, str):
         return f"'{value}'"
     else:
