@@ -100,6 +100,13 @@ def is_complex(value):
         return value
 
 
+def is_str(finish):
+    if isinstance(finish, str):
+        return f"'{finish}'"
+    else:
+        return finish
+
+
 def create_plain(lst, addon='', line=''):
     start = "Property '" + addon
     for key in lst:
@@ -110,14 +117,17 @@ def create_plain(lst, addon='', line=''):
             line += f"{start}{key_name}' was removed\n"
         if key_stat == 'added':
             finish = is_complex(key_value)
+            is_str(finish)
             line += f"{start}{key_name}' was added with value: {finish}\n"
         if key_stat == 'changeddict':
             line = create_plain(key_value, addon + key_name + '.', line)
         elif key_stat == 'changed':
             finish_old = is_complex(key_value['old_value'])
             finish_new = is_complex(key_value['new_value'])
+            is_str(finish_old)
+            is_str(finish_new)
             line += f"{start}{key_name}' was updated. "\
-                f"From '{finish_old}' to '{finish_new}'\n"
+                f"From '{finish_old}' to {finish_new}\n"
     return line
 
 
