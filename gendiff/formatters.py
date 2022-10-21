@@ -4,11 +4,11 @@ SPACES = '    '
 
 
 def lower(value):
-    low = ['True', 'False', 'true', 'false']
+    low = ['True', 'False']
     if str(value) in low:
         return str(value).lower()
-    elif str(value) == '' or str(value) == 'null':
-        value = 'None'
+    elif str(value) == 'None':
+        value = ''
         return value
     else:
         return value
