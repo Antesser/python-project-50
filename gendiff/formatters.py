@@ -3,42 +3,29 @@ import json
 SPACES = '    '
 
 
-def lower(value):
-    low = ['True', 'False']
-    if str(value) in low:
-        return str(value).lower()
-    elif str(value) == 'None':
-        value = ''
-        return value
-    else:
-        return value
-
-
 def check_diff(first, second):
     diff = []
     keys_first = first.keys()
     keys_second = second.keys()
     keys_both = keys_second & keys_first
     for key in keys_both:
-        first_value = first.get(key)
-        second_value = second.get(key)
-        f_val = lower(first_value)
-        s_val = lower(second_value)
-        if f_val != s_val:
-            if isinstance(f_val, dict) and isinstance(s_val, dict):
+        fst_value = first.get(key)
+        scd_value = second.get(key)
+        if fst_value != scd_value:
+            if isinstance(fst_value, dict) and isinstance(scd_value, dict):
                 diff_chd = ({'key': key, 'status': 'changeddict',
-                            'value': check_diff(f_val, s_val)})
+                            'value': check_diff(fst_value, scd_value)})
                 diff.append(diff_chd)
             else:
                 diff_changed = ({'key': key, 'status': 'changed',
                                  'value': {
-                                        'old_value': f_val,
-                                        'new_value': s_val}
+                                        'old_value': fst_value,
+                                        'new_value': scd_value}
                                  })
                 diff.append(diff_changed)
         else:
             diff_unchanged = ({'key': key, 'status': 'unchanged',
-                               'value': first_value})
+                              'value': fst_value})
             diff.append(diff_unchanged)
     deleted = keys_first - keys_second
     for key in deleted:
@@ -61,7 +48,7 @@ def get_val(value, lvl):
 def prettify_val(value, lvl):
     diff = ['{']
     for key, value in value.items():
-        value = get_val(value, lvl=lvl+1)
+        value = get_val(value, lvl=lvl + 1)
         diff.append(
             f"{SPACES * (lvl + 2)}{key}: {value}"
         )

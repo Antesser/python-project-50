@@ -12,4 +12,17 @@ def parser(path):
             data = yaml.safe_load(file)
     else:
         return 'Inputed format is not supported'
+    lower(data)
     return data
+
+
+def lower(data):
+    for key, item in data.items():
+        if isinstance(item, dict):
+            lower(item)
+        if item is True:
+            data[key] = 'true'
+        elif item is False:
+            data[key] = 'false'
+        elif isinstance(item, type(None)):
+            data[key] = 'null'
