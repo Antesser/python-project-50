@@ -73,7 +73,8 @@ def check_addon(addon, key_name):
     return addon + f'.{key_name}' if addon else key_name
 
 
-def create_plain(lst, addon="", result=[]):
+def create_plain(lst, addon=""):
+    result = []
     start = "Property '"
     for key in lst:
         current_addon = check_addon(addon, key['key'])
