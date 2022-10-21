@@ -127,7 +127,7 @@ def create_plain(lst, addon='', line=''):
             is_str(finish_old)
             is_str(finish_new)
             line += f"{start}{key_name}' was updated. "\
-                f"From '{finish_old}' to {finish_new}\n"
+                f"From {finish_old} to {finish_new}\n"
     return line
 
 
