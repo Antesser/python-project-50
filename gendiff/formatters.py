@@ -36,9 +36,9 @@ def prettify(lst, lvl=0):
         elif key_stat == 'changed':
             diff.extend([
                 f"{indent}  - {key_name}: "
-                f"{get_val(key['value']['old_value'], lvl)}",
+                f"{get_val(key_value['old_value'], lvl)}",
                 f"{indent}  + {key_name}: "
-                f"{get_val(key['value']['new_value'], lvl)}"
+                f"{get_val(key_value['new_value'], lvl)}"
             ])
         else:
             status = other_statuses(key_stat)
