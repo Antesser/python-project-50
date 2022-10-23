@@ -1,3 +1,6 @@
-/__pycache__
-/.vscode
-/.DS_Store
+/tests/__pycache__/
+/gendiff/__pycache__/
+/gendiff/formatters/__pycache__/
+/gendiff/scripts/__pycache__/
+.vscode
+.DS_Store
