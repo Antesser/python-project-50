@@ -11,7 +11,7 @@ def parser(path):
         with open(path, 'r') as file:
             data = yaml.safe_load(file)
     else:
-        return 'Inputed format is not supported'
+        raise ValueError('Inputed format is not supported')
     lower(data)
     return data
 

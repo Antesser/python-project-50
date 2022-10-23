@@ -3,7 +3,7 @@ from gendiff import cli, engine
 
 
 def main():
-    args = cli.run()
+    args = cli.parse_args()
     engine.start_program(args)
 
 
