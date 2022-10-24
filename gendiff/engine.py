@@ -5,10 +5,6 @@ from gendiff.parser import parser
 from gendiff.create_diff import create_diff
 
 
-def start_program(args):
-    print(generate_diff(args.first_file, args.second_file, args.format))
-
-
 def generate_diff(first_file, second_file, format=''):
     first = parser(first_file)
     second = parser(second_file)
