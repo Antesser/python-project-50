@@ -5,7 +5,7 @@ def check_complex(value):
     if isinstance(value, dict):
         return "[complex value]"
     else:
-        return json.dumps(value)
+        return json.dumps(value).replace('"', "'")
 
 
 def check_path(path, key_name):
