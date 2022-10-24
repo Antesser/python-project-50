@@ -1,13 +1,11 @@
-def to_str(value):
-    vals = ['true', 'false', 'null']
+import json
+
+
+def check_complex(value):
     if isinstance(value, dict):
         return "[complex value]"
-    elif value in vals:
-        return value
-    elif isinstance(value, str):
-        return f"'{value}'"
     else:
-        return value
+        return json.dumps(value)
 
 
 def check_path(path, key_name):
@@ -26,8 +24,8 @@ def create_plain(lst, path=""):
         elif key_stat == 'changed':
             result.append(
                 f"{start}{current_path}' was updated. "
-                f"From {to_str(key_value['old_value'])} "
-                f"to {to_str(key_value['new_value'])}")
+                f"From {check_complex(key_value['old_value'])} "
+                f"to {check_complex(key_value['new_value'])}")
         elif key_stat == 'deleted':
             result.append(
                 f"{start}{current_path}' was removed"
@@ -35,6 +33,6 @@ def create_plain(lst, path=""):
         elif key_stat == 'added':
             result.append(
                 f"{start}{current_path}' was added with value: "
-                f"{to_str(key_value)}"
+                f"{check_complex(key_value)}"
             )
     return '\n'.join(result)

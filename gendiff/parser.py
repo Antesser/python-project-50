@@ -3,8 +3,12 @@ import os
 import yaml
 
 
+def file_reader(file):
+    return os.path.splitext(file)[-1]
+
+
 def parser(path):
-    file_extension = os.path.splitext(path)[-1]
+    file_extension = file_reader(path)
     if file_extension == '.json':
         data = json.load(open(path))
     elif file_extension == '.yml' or file_extension == '.yaml':
@@ -12,17 +16,4 @@ def parser(path):
             data = yaml.safe_load(file)
     else:
         raise ValueError('Inputed format is not supported')
-    lower(data)
     return data
-
-
-def lower(data):
-    for key, item in data.items():
-        if isinstance(item, dict):
-            lower(item)
-        if item is True:
-            data[key] = 'true'
-        elif item is False:
-            data[key] = 'false'
-        elif isinstance(item, type(None)):
-            data[key] = 'null'

@@ -1,10 +1,21 @@
+import json
+
+
 SPACES = '    '
+
+
+def from_json(data):
+    for value in data:
+        if isinstance(value, dict):
+            from_json(value)
+        else:
+            return json.dumps(value)
 
 
 def get_val(value, lvl):
     if isinstance(value, dict):
         return prettify_val(value, lvl)
-    return value
+    return json.dumps(value).replace('"', '')
 
 
 def prettify_val(value, lvl):
