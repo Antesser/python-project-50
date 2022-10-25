@@ -9,14 +9,11 @@ STATUSES = {'added': '  + ',
 
 def to_str(value, lvl):
     if isinstance(value, dict):
-        if isinstance(value, dict):
-            diff = '{\n'
-            for key, value in value.items():
-                diff += f'{SPACES * (lvl + 2)}{key}: '
-                diff += to_str(value, lvl=lvl + 1) + '\n'
-            diff += SPACES * (lvl) + '    }'
-        else:
-            diff = str(value)
+        diff = '{\n'
+        for key, value in value.items():
+            diff += f'{SPACES * (lvl + 2)}{key}: '
+            diff += to_str(value, lvl=lvl + 1) + '\n'
+        diff += SPACES * (lvl) + '    }'
         return diff
     return json.dumps(value).replace('"', '')
 
