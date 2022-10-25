@@ -13,24 +13,12 @@ def to_str(value, lvl):
             diff = '{\n'
             for key, value in value.items():
                 diff += f'{SPACES * (lvl + 2)}{key}: '
-                diff += prettify_val(value, lvl=lvl + 1) + '\n'
+                diff += to_str(value, lvl=lvl + 1) + '\n'
             diff += SPACES * (lvl) + '    }'
         else:
             diff = str(value)
         return diff
     return json.dumps(value).replace('"', '')
-
-
-def prettify_val(value, lvl):
-    if isinstance(value, dict):
-        diff = '{\n'
-        for key, value in value.items():
-            diff += f'{SPACES * (lvl + 2)}{key}: '
-            diff += prettify_val(value, lvl=lvl + 1) + '\n'
-        diff += SPACES * (lvl) + '    }'
-    else:
-        diff = str(value)
-    return diff
 
 
 def prettify(lst, lvl=0):
