@@ -4,6 +4,8 @@ def create_diff(first, second):
     keys_second = second.keys()
     keys_all = keys_second | keys_first
     keys_both = keys_second & keys_first
+    deleted = keys_first - keys_second
+    added = keys_second - keys_first
     for key in keys_all:
         if key in keys_both:
             fst_value = first.get(key)
@@ -22,13 +24,11 @@ def create_diff(first, second):
                 diff_unchanged = ({'key': key, 'status': 'unchanged',
                                    'value': fst_value})
                 diff.append(diff_unchanged)
-        deleted = keys_first - keys_second
-        if key in deleted:
+        elif key in deleted:
             diff_del = {'key': key, 'status': 'deleted',
                         'value': first.get(key)}
-            diff.append(diff_del)
-        added = keys_second - keys_first
-        if key in added:
+            diff.append(diff_del)      
+        elif key in added:
             diff_add = {'key': key, 'status': 'added',
                         'value': second.get(key)}
             diff.append(diff_add)
