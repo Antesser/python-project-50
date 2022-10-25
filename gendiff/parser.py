@@ -5,7 +5,7 @@ import yaml
 
 def check_extension(path):
     file_extension = os.path.splitext(path)[-1]
-    return file_extension
+    return file_loader(path, file_extension)
 
 
 def file_loader(path, extension):
@@ -20,6 +20,5 @@ def file_loader(path, extension):
 
 
 def parser(path):
-    extension = check_extension(path)
-    data = file_loader(path, extension)
+    data = check_extension(path)
     return data
