@@ -8,10 +8,9 @@ def file_reader(file):
 
 
 def parser(path):
-    file_extension = file_reader(path)
-    if file_extension == '.json':
+    if file_reader(path) == '.json':
         data = json.load(open(path))
-    elif file_extension == '.yml' or file_extension == '.yaml':
+    elif file_reader(path) == '.yml' or '.yaml':
         with open(path, 'r') as file:
             data = yaml.safe_load(file)
     else:
