@@ -27,7 +27,7 @@ def create_diff(first, second):
         elif key in deleted:
             diff_del = {'key': key, 'status': 'deleted',
                         'value': first.get(key)}
-            diff.append(diff_del)      
+            diff.append(diff_del)
         elif key in added:
             diff_add = {'key': key, 'status': 'added',
                         'value': second.get(key)}
