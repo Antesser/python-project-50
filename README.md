@@ -16,6 +16,7 @@ from gendiff import generate_diff
 diff = generate_diff(file_path1, file_path2, format_name)
 print(diff)
 ```
+## Демонстрация работы программы:
 
 [![Вывод справки](https://asciinema.org/a/QngukY4mSLkkDiSvXyVd5M0ZN.svg)](https://asciinema.org/a/QngukY4mSLkkDiSvXyVd5M0ZN)
 [![Сравнение плоских файлов](https://asciinema.org/a/BCwj7LTIStm2Syc1LrHgNBtln.svg)](https://asciinema.org/a/BCwj7LTIStm2Syc1LrHgNBtln)
