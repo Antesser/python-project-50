@@ -8,21 +8,23 @@ def create_diff(first, second):
     added = keys_second - keys_first
     for key in keys_all:
         if key in keys_both:
-            fst_value = first.get(key)
-            scd_value = second.get(key)
-            if fst_value != scd_value:
-                if isinstance(fst_value, dict) and isinstance(scd_value, dict):
+            first_value = first.get(key)
+            second_value = second.get(key)
+            if first_value != second_value:
+                if isinstance(first_value, dict) and isinstance(second_value,
+                                                                dict):
                     diff_chd = ({'key': key, 'status': 'changeddict',
-                                'value': create_diff(fst_value, scd_value)})
+                                'value': create_diff(first_value,
+                                                     second_value)})
                     diff.append(diff_chd)
                 else:
                     diff_changed = ({'key': key, 'status': 'changed',
-                                    'value': {'old_value': fst_value,
-                                              'new_value': scd_value}})
+                                    'value': {'old_value': first_value,
+                                              'new_value': second_value}})
                     diff.append(diff_changed)
             else:
                 diff_unchanged = ({'key': key, 'status': 'unchanged',
-                                   'value': fst_value})
+                                   'value': first_value})
                 diff.append(diff_unchanged)
         elif key in deleted:
             diff_del = {'key': key, 'status': 'deleted',
