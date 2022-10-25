@@ -3,11 +3,15 @@ import os
 import yaml
 
 
-def file_reader(path):
+def check_extension(path):
     file_extension = os.path.splitext(path)[-1]
-    if file_extension == '.json':
+    return file_extension
+
+
+def file_loader(path, extension):
+    if extension == '.json':
         data = json.load(open(path))
-    elif file_extension == '.yml' or '.yaml':
+    elif extension == '.yml' or '.yaml':
         with open(path, 'r') as file:
             data = yaml.safe_load(file)
     else:
@@ -16,5 +20,6 @@ def file_reader(path):
 
 
 def parser(path):
-    data = file_reader(path)
+    extension = check_extension(path)
+    data = file_loader(path, extension)
     return data
