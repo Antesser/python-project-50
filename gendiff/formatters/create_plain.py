@@ -8,10 +8,6 @@ def to_str(value):
         return json.dumps(value).replace('"', "'")
 
 
-def check_path(path, key_name):
-    return path + f'.{key_name}' if path else key_name
-
-
 def create_plain(lst, path=""):
     result = []
     start = "Property '"
