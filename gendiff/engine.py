@@ -5,21 +5,14 @@ from gendiff.parser import find_extension, load_file, parser
 from gendiff.create_diff import create_diff
 
 
-def generate_diff(first_file, second_file, format='stylish'):
+def generate_diff(first_file, second_file, format=''):
     first = parser(load_file(first_file), find_extension(first_file))
     second = parser(load_file(second_file), find_extension(second_file))
     diff = create_diff(first, second)
-    file = formatting_diff(diff, format='stylish')
-    return file
-
-
-def formatting_diff(diff, format):
     if format == 'plain':
         diff = create_plain(diff)
     elif format == 'json':
         diff = create_json(diff)
-    elif format == 'stylish':
-        diff = prettify(diff)
     else:
-        raise ValueError('Inputed format is not supported')
+        diff = prettify(diff)
     return diff
