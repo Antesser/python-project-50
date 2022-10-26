@@ -16,7 +16,7 @@ def create_plain(lst, path=""):
         key_stat = key["status"]
         key_value = key["value"]
         current_path = path + f'.{key_name}' if path else key_name
-        if key_stat == 'changeddict':
+        if key_stat == 'nested':
             result.append(create_plain(key_value, current_path))
         elif key_stat == 'changed':
             result.append(

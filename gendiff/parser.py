@@ -3,11 +3,11 @@ import os
 import yaml
 
 
-def check_extension(path):
+def find_extension(path):
     return os.path.splitext(path)[-1]
 
 
-def file_loader(path):
+def load_file(path):
     with open(path) as file:
         return file.read()
 

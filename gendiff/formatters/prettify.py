@@ -25,7 +25,7 @@ def prettify(lst, lvl=0):
         key_name = key['key']
         key_stat = key['status']
         key_value = key['value']
-        if key_stat == 'changeddict':
+        if key_stat == 'nested':
             diff.extend([
                 f"{indent}    {key_name}: {{",
                 prettify(key_value, lvl=lvl + 1),

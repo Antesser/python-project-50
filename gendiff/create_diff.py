@@ -13,10 +13,10 @@ def create_diff(first, second):
             if first_value != second_value:
                 if isinstance(first_value, dict) and isinstance(second_value,
                                                                 dict):
-                    diff_chd = ({'key': key, 'status': 'changeddict',
-                                'value': create_diff(first_value,
-                                                     second_value)})
-                    diff.append(diff_chd)
+                    diff_nested = ({'key': key, 'status': 'nested',
+                                    'value': create_diff(first_value,
+                                                         second_value)})
+                    diff.append(diff_nested)
                 else:
                     diff_changed = ({'key': key, 'status': 'changed',
                                     'value': {'old_value': first_value,
