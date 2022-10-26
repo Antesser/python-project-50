@@ -9,7 +9,7 @@ def generate_diff(first_file, second_file, format='stylish'):
     first = parser(load_file(first_file), find_extension(first_file))
     second = parser(load_file(second_file), find_extension(second_file))
     diff = create_diff(first, second)
-    file = formatting_diff(diff, format)
+    file = formatting_diff(diff, format='stylish')
     return file
 
 

@@ -17,5 +17,3 @@ def parser(path, extension):
         return json.loads(path)
     elif extension == 'yaml' or 'yml':
         return yaml.safe_load(path)
-    else:
-        raise ValueError('Inputed format is not supported')
