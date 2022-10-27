@@ -1,4 +1,4 @@
-def create_diff(first, second):
+def create_diff(first, second):  # noqa: C901
     diff = []
     keys_first = first.keys()
     keys_second = second.keys()
