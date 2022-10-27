@@ -12,7 +12,7 @@ def load_file(path):
         return file.read()
 
 
-def parser(path, extension):
+def parsing(path, extension):
     if extension == 'json':
         return json.loads(path)
     elif extension == 'yaml' or 'yml':

@@ -1,5 +1,5 @@
-name: GitHub Actions
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+name: Pytests Action
+run-name: ${{ github.actor }} is testing program installation🚀
 
 on: [push]
 
