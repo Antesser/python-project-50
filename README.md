@@ -1,7 +1,7 @@
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/Antesser/python-project-50/workflows/hexlet-check/badge.svg)](https://github.com/Antesser/python-project-50/actions)
 [![Maintainability](https://api.codeclimate.com/v1/badges/28985d5e94e0c2acc1a8/maintainability)](https://codeclimate.com/github/Antesser/python-project-50/maintainability)
-[![GitHub Actions](https://github.com/Antesser/python-project-50/actions/workflows/github-actions-demo.yml/badge.svg)](https://github.com/Antesser/python-project-50/actions/workflows/github-actions-demo.yml)
+[![GitHub Actions](https://github.com/Antesser/python-project-50/actions/workflows/github-actions-demo.yml/badge.svg?branch=main)](https://github.com/Antesser/python-project-50/actions/workflows/github-actions-demo.yml)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/28985d5e94e0c2acc1a8/test_coverage)](https://codeclimate.com/github/Antesser/python-project-50/test_coverage)
 
 ## Установка и использование
