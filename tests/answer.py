@@ -21,7 +21,7 @@ Property 'group1.nest' was updated. From [complex value] to 'str'
 Property 'group2' was removed
 Property 'group3' was added with value: [complex value]'''
 
-NESTED = '''{ # noqa: W291
+NESTED = '''{
     common: {
       + follow: false
         setting1: Value 1
@@ -64,4 +64,4 @@ NESTED = '''{ # noqa: W291
         }
         fee: 100500
     }
-}'''
+}'''  # noqa: W291
